@@ -131,7 +131,7 @@ class Response
  * Response string
  *
  * @access protected
- * @var array
+ * @var string
  */
 	protected $data;
 
