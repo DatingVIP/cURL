@@ -6,10 +6,9 @@
  *
  * @package DatingVIP
  * @subpackage cURL
- * @version 2.0
  * @copyright &copy; 2014 firstbeatmedia.com
  * @author Joe Watkins <joe@firstbeatmedia.com>
- * @version 2.0 - revise API
+ * @version 2.0.1 - revise API
  *
  * @example
  * try {
@@ -27,7 +26,7 @@
 namespace DatingVIP\cURL;
 
 class Request
-{	
+{
 /**
  * Constructor
  *
@@ -99,7 +98,7 @@ class Request
  * @access public
  * @return $this
  */
-	public function setBodyUsed($used) 
+	public function setBodyUsed($used)
 	{
 		return $this->setOption(CURLOPT_RETURNTRANSFER, $used);
 	}
@@ -127,7 +126,7 @@ class Request
 	{
 		return $this->setOption(CURLOPT_PROXY, $proxy);
 	}
-	
+
 /**
  * Set file location where cookie data will be stored and send on each new request
  *
@@ -141,7 +140,7 @@ class Request
 		$this->setOption(CURLOPT_COOKIEFILE, $file);
 		return $this;
 	}
-	
+
 /**
  * Set connection timeout to use for each request
  *
@@ -153,7 +152,7 @@ class Request
 	{
 		return $this->setOption(CURLOPT_TIMEOUT, $timeout);
 	}
-	
+
 /**
  * Set interface to use for each request
  *
@@ -161,7 +160,7 @@ class Request
  * @access public
  * @return $this
  */
-	public function setInterface($interface) 
+	public function setInterface($interface)
 	{
 		return $this->setOption(CURLOPT_INTERFACE, $interface);
 	}
@@ -189,7 +188,7 @@ class Request
 	public function getOption($option) {
 		return $this->options[$option];
 	}
-	
+
 /**
  * Get current options
  *
@@ -251,7 +250,7 @@ class Request
 
 		if (!is_resource($fp)) {
 			$this->options[CURLOPT_FILE] = fopen($fp, $mode);
-			
+
 			if (!$this->options[CURLOPT_FILE]) {
 				throw new \RuntimeException(
 					"failed to open the file {$fp} for writing");
@@ -264,7 +263,7 @@ class Request
 
 		if (!is_resource($fp))
 			fclose($this->options[CURLOPT_FILE]);
-		
+
 		return $response;
 	}
 
@@ -289,7 +288,7 @@ class Request
 					"/", "\\", $location));
 			} else $files[$name] = sprintf("@%s", $location);
 		}
-		
+
 		return $this->post($url, $post);
 	}
 
