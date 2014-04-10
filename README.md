@@ -11,8 +11,8 @@ You can haz codez !
 Making a simple GET request:
 
 ```php
-require_once("DatingVIP/cURL/Request.php");
-require_once("DatingVIP/cURL/Response.php");
+require_once("src/DatingVIP/cURL/Request.php");
+require_once("src/DatingVIP/cURL/Response.php");
 
 use DatingVIP\cURL\Request;
 use DatingVIP\cURL\Response;
@@ -34,8 +34,8 @@ try {
 Making a POST request:
 
 ```php
-require_once("DatingVIP/cURL/Request.php");
-require_once("DatingVIP/cURL/Response.php");
+require_once("src/DatingVIP/cURL/Request.php");
+require_once("src/DatingVIP/cURL/Response.php");
 
 use DatingVIP\cURL\Request;
 use DatingVIP\cURL\Response;
@@ -57,8 +57,8 @@ try {
 If you like to be super verbose about everything for no good reason:
 
 ```php
-require_once("DatingVIP/cURL/Request.php");
-require_once("DatingVIP/cURL/Response.php");
+require_once("src/DatingVIP/cURL/Request.php");
+require_once("src/DatingVIP/cURL/Response.php");
 
 use DatingVIP\cURL\Request;
 use DatingVIP\cURL\Response;
@@ -70,7 +70,7 @@ try {
 		],
 		CURLOPT_URL => "http://www.example.com"
 	]);
-	
+
 	$response = new Response($request);
 } catch (\RuntimeException $ex) {
 	echo (string) $ex;
