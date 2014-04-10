@@ -141,7 +141,10 @@ class Response
  * @access protected
  * @var array
  */
-	protected $error;
+	protected $error = [
+		"errno" => 0,
+		"error" => null
+	];
 
 /**
  * Transfer information
