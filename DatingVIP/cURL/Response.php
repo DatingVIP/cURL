@@ -87,13 +87,20 @@ class Response
 	public function getTime()           { return $this->getInfo("total_time"); }
 
 /**
- * Get total time
+ * Get transfer info
  *
  * @param int
  * @access public
  * @return float
+ * @throws \RuntimeException
  */
-	public function getInfo($info = 0)  { return $info ? $this->info[$info] : $this->info; }
+	public function getInfo($info = 0)  { 
+		if ($info) {
+			if (isset($this->info)) {
+				return $this->info[$info];
+			} else throw new \RuntimeException("could not find the requested info {$info}");
+		} else return $this->info;
+	}
 
 /**
  * Get cURL error code
