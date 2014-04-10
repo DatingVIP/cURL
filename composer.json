@@ -1,0 +1,24 @@
+{
+    "name": "datingvip/curl",
+    "type": "library",
+    "description": "Curl based HTTP Client - Simple but effective OOP wrapper around Curl php lib",
+    "keywords": ["curl"],
+    "homepage": "https://github.com/DatingVIP/cURL",
+    "license": "LGPLv3",
+    "authors": [
+        {
+            "name": "Joe Watkins",
+            "email": "joe@firstbeatmedia.com",
+            "homepage": "http://firstbeatmedia.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.0.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "DatingVIP": "src"
+        }
+    }
+}
