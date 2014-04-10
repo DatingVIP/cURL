@@ -18,6 +18,7 @@ class Response
  *
  * @param   Request   $request
  * @access	public
+ * @throws  \RuntimeException
  */
 	public function __construct(Request $request) {
 		$options = $request->getOptions();

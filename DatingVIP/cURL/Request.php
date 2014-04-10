@@ -207,7 +207,7 @@ class Request
  * @param mixed post
  * @access public
  * @return Response
- * @throws RuntimeException
+ * @throws \RuntimeException
  */
 	public function post($url, $post = [])
 	{
@@ -224,7 +224,7 @@ class Request
  * @param string url
  * @access public
  * @return Response
- * @throws RuntimeException
+ * @throws \RuntimeException
  */
 	public function get($url)
 	{
@@ -242,7 +242,7 @@ class Request
  * @param string mode valid file stream mode
  * @access public
  * @return Response
- * @throws RuntimeException
+ * @throws \RuntimeException
  */
 	public function downloadTo($url, $fp, $mode = "w+")
 	{
@@ -278,7 +278,7 @@ class Request
  * @param array files array ie. $foo['file.mp3'] = '/path/to/file.mp3'
  * @access public
  * @return Response
- * @throws RuntimeException
+ * @throws \RuntimeException
  */
 	public function uploadTo($url, $post, $files = array())
 	{
