@@ -61,6 +61,7 @@ class Request
  * @param string username
  * @param string password
  * @access public
+ * @return $this
  */
 	public function setCredentials($username,$password)
 	{
@@ -73,6 +74,7 @@ class Request
  *
  * @param string referer
  * @access public
+ * @return $this
  */
 	public function setReferer($referer)
 	{
@@ -85,6 +87,7 @@ class Request
  *
  * @param string agent
  * @access public
+ * @return $this
  */
 	public function setUseragent($agent)
 	{
@@ -97,6 +100,7 @@ class Request
  *
  * @param boolean
  * @access public
+ * @return $this
  */
 	public function setHeadersUsed($used)
 	{
@@ -108,6 +112,7 @@ class Request
  *
  * @param boolean
  * @access public
+ * @return $this
  */
 	public function setBodyUsed($used) 
 	{
@@ -212,12 +217,12 @@ class Request
 
 /**
  * Send post data to target URL
- * return data returned from url or false if error occured
  *
  * @param string url
- * @param mixed post (assoc array ie. $foo['post_var_name'] = $value or as string like var=val1&var2=val2)
- * @return Response
+ * @param mixed post
  * @access public
+ * @return Response
+ * @throws RuntimeException
  */
 	public function post($url, $post = [])
 	{
@@ -232,8 +237,9 @@ class Request
  * Get data from target URL
  *
  * @param string url
- * @return Response
  * @access public
+ * @return Response
+ * @throws RuntimeException
  */
 	public function get($url)
 	{
@@ -249,8 +255,9 @@ class Request
  * @param string url
  * @param resource value stream resource(ie. fopen) or location
  * @param string mode valid file stream mode
- * @return Response
  * @access public
+ * @return Response
+ * @throws RuntimeException
  */
 	public function downloadTo($url, $fp, $mode = "w+")
 	{
@@ -284,8 +291,9 @@ class Request
  * @param string url
  * @param array post array ie. $foo['post_var_name'] = $value
  * @param array files array ie. $foo['file.mp3'] = '/path/to/file.mp3'
- * @return Response
  * @access public
+ * @return Response
+ * @throws RuntimeException
  */
 	public function uploadTo($url, $post, $files = array())
 	{
@@ -299,4 +307,4 @@ class Request
 		
 		return $this->post($url, $post);
 	}
-} // end of class
+}
