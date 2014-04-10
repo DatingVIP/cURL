@@ -59,6 +59,7 @@ class Response
  *
  * @access public
  * @return int
+ * @throws \RuntimeException
  */
 	public function getResponseCode()   { return $this->getInfo("http_code"); }
 	
@@ -67,6 +68,7 @@ class Response
  *
  * @access public
  * @return string
+ * @throws \RuntimeException
  */
 	public function getURL()            { return $this->getInfo("url");  }
 
@@ -75,6 +77,7 @@ class Response
  *
  * @access public
  * @return string
+ * @throws \RuntimeException
  */
 	public function getContentType()    { return $this->getInfo("content-type"); }
 	
@@ -83,6 +86,7 @@ class Response
  *
  * @access public
  * @return float
+ * @throws \RuntimeException
  */
 	public function getTime()           { return $this->getInfo("total_time"); }
 
