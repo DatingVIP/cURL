@@ -1,6 +1,6 @@
 <?php
 /**
- * Curl based HTTP Request
+ * cURL based HTTP Request
  *
  * Simple but effective OOP wrapper around Curl php lib.
  *
@@ -27,22 +27,7 @@
 namespace DatingVIP\cURL;
 
 class Request
-{
-/**
- * Default sensible options for most transfers
- *
- * @access protected
- * @var array
- */
-	protected $options = [
-		CURLOPT_RETURNTRANSFER => true,
-		CURLOPT_FAILONERROR => true,
-		CURLOPT_FOLLOWLOCATION => true,
-		CURLOPT_ENCODING => "gzip deflate",
-		CURLOPT_SSL_VERIFYPEER => false,
-		CURLOPT_TIMEOUT => 5
-	];
-	
+{	
 /**
  * Constructor
  *
@@ -307,4 +292,19 @@ class Request
 		
 		return $this->post($url, $post);
 	}
+
+/**
+ * Default sensible options for most transfers
+ *
+ * @access protected
+ * @var array
+ */
+	protected $options = [
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_FAILONERROR => true,
+		CURLOPT_FOLLOWLOCATION => true,
+		CURLOPT_ENCODING => "gzip deflate",
+		CURLOPT_SSL_VERIFYPEER => false,
+		CURLOPT_TIMEOUT => 5
+	];
 }
