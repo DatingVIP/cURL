@@ -8,7 +8,7 @@
  * @subpackage cURL
  * @copyright &copy; 2014 firstbeatmedia.com
  * @author Joe Watkins <joe@firstbeatmedia.com>
- * @version 2.0.1 - revise API
+ * @version 2.0.2 - revise API
  *
  * @example
  * try {
