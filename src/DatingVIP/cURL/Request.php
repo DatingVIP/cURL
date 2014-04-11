@@ -360,5 +360,5 @@ class Request
  * @access protected
  * @var array
  */
-	protected $headers;
+	protected $headers = [];
 }
