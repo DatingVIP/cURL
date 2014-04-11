@@ -53,7 +53,7 @@ class Response
 		
 		if ($this->error["errno"])
 			throw new \RuntimeException(
-				"failed to execute request for {$options["CURLOPT_URL"]}", 
+				"failed to execute request for {$options[CURLOPT_URL]}",
 				$this->error["errno"]);
 		
 		$this->info = curl_getinfo($handle);
