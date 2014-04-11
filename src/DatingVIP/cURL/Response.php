@@ -4,13 +4,14 @@
  *
  * @package DatingVIP
  * @subpackage cURL
+ * @version 2.0
  * @copyright &copy; 2014 firstbeatmedia.com
  * @author Joe Watkins <joe@firstbeatmedia.com>
- * @version 2.0.1 - revise API
+ * @version 2.0 - revise API
  */
 namespace DatingVIP\cURL;
 
-class Response
+class Response 
 {
 /**
  * Construct response object from Request
@@ -21,12 +22,13 @@ class Response
  */
 	public function __construct(Request $request) {
 		$options = $request->getOptions();
+		$headers = $request->getHeaders();
 
 		if (!isset($options[CURLOPT_URL]))
 			throw new \RuntimeException("the URL for the request is not set");
 
 		$handle = curl_init();
-
+		
 		if (!$handle)
 			throw new \RuntimeException("failed to initialized cURL");
 
@@ -37,18 +39,24 @@ class Response
 						"failed to set option {$option} => {$value}");
 			}
 		}
-
+		 
+		if (count($headers)) {
+			if (!curl_setopt($handle, CURLOPT_HTTPHEADER, $headers)) {
+				throw new \RuntimeException("malformed headers collection");
+			}
+		}
+		
 		$this->data = curl_exec($handle);
 		$this->error = [
 			"errno" => curl_errno($handle),
 			"error" => curl_error($handle)
 		];
-
+		
 		if ($this->error["errno"])
 			throw new \RuntimeException(
-				"failed to execute request for {$options["CURLOPT_URL"]}",
+				"failed to execute request for {$options["CURLOPT_URL"]}", 
 				$this->error["errno"]);
-
+		
 		$this->info = curl_getinfo($handle);
 		curl_close($handle);
 	}
@@ -61,7 +69,7 @@ class Response
  * @throws \RuntimeException
  */
 	public function getResponseCode()   { return $this->getInfo("http_code"); }
-
+	
 /**
  * Get URL requested
  *
@@ -79,7 +87,7 @@ class Response
  * @throws \RuntimeException
  */
 	public function getContentType()    { return $this->getInfo("content-type"); }
-
+	
 /**
  * Get total time
  *
@@ -97,7 +105,7 @@ class Response
  * @return float
  * @throws \RuntimeException
  */
-	public function getInfo($info = 0)  {
+	public function getInfo($info = 0)  { 
 		if ($info) {
 			if (isset($this->info)) {
 				return $this->info[$info];

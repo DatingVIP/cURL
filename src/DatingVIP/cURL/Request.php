@@ -104,18 +104,6 @@ class Request
 	}
 
 /**
- * Set http headers
- *
- * @param array	$headers
- * @access public
- * @return $this
- */
-	public function setHeaders($headers)
-	{
-		return $this->setOption(CURLOPT_HTTPHEADER, $headers);
-	}
-
-/**
  * Set proxy to use for each curl request
  *
  * @param string proxy
@@ -198,6 +186,65 @@ class Request
 	public function getOptions() {
 		return $this->options;
 	}
+	
+/**
+ * Get current headers collection
+ *
+ * @access public
+ * @return array
+ */
+	public function getHeaders() {
+		$headers = [];
+		foreach ($this->headers as $header => $value) {
+			if (is_array($value)) {
+				$headers[$header] = implode("; ", $value);
+			} else $headers[$header] = $value;
+		}
+		return $headers;
+	}
+	
+/**
+ * Adds a header to the headers collection
+ * 
+ * @param string name
+ * @param string value
+ * @access public
+ * @return $this
+ */
+	public function addHeader($name, $value) {
+		if (isset($this->headers[$name])) {
+			if (!is_array($this->headers[$name])) {
+				$this->headers[$name] = [$this->headers[$name], $value];
+			} else $this->headers[$name][] = $value;
+		} else $this->headers[$name] = $value;
+		return $this;
+	}
+	
+/**
+ * Sets a header in the headers collection
+ * 
+ * @param string name
+ * @param string value
+ * @access public
+ * @return $this
+ */
+	public function setHeader($name, $value) {
+		$this->headers[$name] = $value;
+		return $this;
+	}
+	
+/**
+ * Sets headers collection
+ * 
+ * @param string name
+ * @param array headers
+ * @access public
+ * @return $this
+ */
+	public function setHeaders($headers) {
+		$this->headers = $headers;
+		return $this;
+	}
 
 /**
  * Send post data to target URL
@@ -213,7 +260,7 @@ class Request
 		$this->options[CURLOPT_URL] = $url;
 		$this->options[CURLOPT_POSTFIELDS] = $post;
 		$this->options[CURLOPT_POST] = true;
-
+		
 		return new Response($this);
 	}
 
@@ -306,4 +353,12 @@ class Request
 		CURLOPT_SSL_VERIFYPEER => false,
 		CURLOPT_TIMEOUT => 5
 	];
+	
+/**
+ * Headers array
+ *
+ * @access protected
+ * @var array
+ */
+	protected $headers;
 }
