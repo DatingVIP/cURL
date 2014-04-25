@@ -8,7 +8,7 @@
  * @subpackage cURL
  * @copyright &copy; 2014 firstbeatmedia.com
  * @author Joe Watkins <joe@firstbeatmedia.com>
- * @version 2.0.2 - revise API
+ * @version 2.0.3 - revise API
  *
  * @example
  * try {
@@ -247,19 +247,49 @@ class Request
 	}
 
 /**
+ * Prepare files for merge with post fields
+ * 
+ * @author Dejan Marjanovic <dm@php.net>
+ * @param array files
+ * @access protected
+ * @return array
+ */
+  protected function prepareFiles(array $files = [])
+  {
+		foreach ($files as $name => $location) {
+		  $location = realpath($location);
+		  if (version_compare(PHP_VERSION, '5.5.0', '>=')) {
+		    $files[$name] = new \CurlFile($name, NULL, $location);
+		  } else {
+        $files[$name] = sprintf("@%s", $location);
+		  }
+    }
+    return $files;
+  }
+
+/**
  * Send post data to target URL
  *
  * @param string url
  * @param mixed post
+ * @param mixed files
  * @access public
  * @return Response
  * @throws \RuntimeException
  */
-	public function post($url, $post = [])
+	public function post($url, $post = [], $files = [])
 	{
+    if (!is_array($post)) {
+      $post = [];
+    }
+    
+    $files = $this->prepareFiles($files);
+    $post += $files;
+    
 		$this->options[CURLOPT_URL] = $url;
-		$this->options[CURLOPT_POSTFIELDS] = $post;
-		$this->options[CURLOPT_POST] = true;
+		
+    $this->options[CURLOPT_POST] = true;
+    $this->options[CURLOPT_POSTFIELDS] = $post;
 		
 		return new Response($this);
 	}
@@ -325,18 +355,11 @@ class Request
  * @access public
  * @return Response
  * @throws \RuntimeException
+ * @deprecated Deprecated in Release 2.0.3
  */
-	public function uploadTo($url, $post, $files = array())
+	public function uploadTo($url, $post, $files)
 	{
-		$windows = (strpos(PHP_OS, "WIN") !== false);
-		foreach ($files as $name => $location) {
-			if ($windows) {
-				$files[$name] = sprintf("@%s", str_replace(
-					"/", "\\", $location));
-			} else $files[$name] = sprintf("@%s", $location);
-		}
-
-		return $this->post($url, $post);
+		return $this->post($url, $post, $files);
 	}
 
 /**
