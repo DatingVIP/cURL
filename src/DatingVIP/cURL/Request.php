@@ -312,6 +312,25 @@ class Request
     }
 
     /**
+     * Prepare post array (flatten) as CURLOPT_POST accepts only one-dimensional arrays
+     *
+     * @author Boris Momčilović <boris@firstbeatmedia.com>
+     * @param array files
+     * @access protected
+     * @return array
+     */
+    protected function preparePost(array $post)
+    {
+        foreach ($post as &$value) {
+            if (is_array ($value)) {
+                $value = http_build_query ($value);
+            }
+        }
+
+        return $post;
+    }
+
+    /**
      * Send post data to target URL
      *
      * @param string url
@@ -334,7 +353,7 @@ class Request
         $this->options[CURLOPT_URL] = $url;
 
         $this->options[CURLOPT_POST] = true;
-        $this->options[CURLOPT_POSTFIELDS] = http_build_query ($post);
+        $this->options[CURLOPT_POSTFIELDS] = $this->preparePost ($post);
 
         return new Response($this);
     }
