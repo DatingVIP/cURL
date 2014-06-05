@@ -315,19 +315,28 @@ class Request
      * Prepare post array (flatten) as CURLOPT_POST accepts only one-dimensional arrays
      *
      * @author Boris Momčilović <boris@firstbeatmedia.com>
-     * @param array files
+     * @param array post data
      * @access protected
      * @return array
      */
     protected function preparePost(array $post)
     {
+		$multi_dimensional = false;
+		$has_objects = false;
         foreach ($post as &$value) {
             if (is_array ($value)) {
-                $value = http_build_query ($value);
+                $multi_dimensional = true;
             }
+			if (is_object ($value)) {
+				$has_objects = true;
+			}
         }
 
-        return $post;
+		if ($has_objects && $multi_dimensional) {
+			// w00t?
+		}
+
+        return $multi_dimensional ? http_build_query ($post) : $post;
     }
 
     /**
