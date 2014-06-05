@@ -334,7 +334,7 @@ class Request
         $this->options[CURLOPT_URL] = $url;
 
         $this->options[CURLOPT_POST] = true;
-        $this->options[CURLOPT_POSTFIELDS] = $post;
+        $this->options[CURLOPT_POSTFIELDS] = http_build_query ($post);
 
         return new Response($this);
     }
