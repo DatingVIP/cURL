@@ -37,10 +37,6 @@ class Response
 
         foreach ($options as $option => $value) {
             if ($option) {
-                if ($option == CURLOPT_POSTFIELDS && is_array ($value)) {
-                    $value = http_build_query ($value);
-                }
-
                 if (!curl_setopt($handle, $option, $value)) {
                     throw new \RuntimeException(
                         "failed to set option {$option} => {$value}");
