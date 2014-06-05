@@ -321,20 +321,20 @@ class Request
      */
     protected function preparePost(array $post)
     {
-		$multi_dimensional = false;
-		$has_objects = false;
+        $multi_dimensional = false;
+        $has_objects = false;
         foreach ($post as &$value) {
             if (is_array ($value)) {
                 $multi_dimensional = true;
             }
-			if (is_object ($value)) {
-				$has_objects = true;
-			}
+            if (is_object ($value)) {
+                $has_objects = true;
+            }
         }
 
-		if ($has_objects && $multi_dimensional) {
-			// w00t?
-		}
+        if ($has_objects && $multi_dimensional) {
+            // w00t?
+        }
 
         return $multi_dimensional ? http_build_query ($post) : $post;
     }
