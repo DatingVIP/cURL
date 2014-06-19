@@ -315,12 +315,16 @@ class Request
      * Prepare post array (flatten) as CURLOPT_POST accepts only one-dimensional arrays
      *
      * @author Boris Momčilović <boris@firstbeatmedia.com>
-     * @param array post data
+     * @param mixed post data
      * @access protected
      * @return array
      */
-    protected function preparePost(array $post)
+    protected function preparePost(&$post)
     {
+	if (!is_array($post)) {
+		return $post;
+	}
+
         $multi_dimensional = false;
         $has_objects = false;
         foreach ($post as &$value) {
@@ -352,15 +356,15 @@ class Request
      */
     public function post($url, $post = [], $files = [])
     {
-        if (!is_array($post)) {
-            $post = [];
-        }
-
-        $files = $this->prepareFiles($files);
-        $post += $files;
+	if ($files) {
+		if (!is_array($post)) {
+			throw new \RuntimeException(
+				"can not support array of files and post data string");
+		}
+		$post += $this->prepareFiles($files);
+	}
 
         $this->options[CURLOPT_URL] = $url;
-
         $this->options[CURLOPT_POST] = true;
         $this->options[CURLOPT_POSTFIELDS] = $this->preparePost ($post);
 
