@@ -455,7 +455,7 @@ class Request
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_FAILONERROR    => true,
         CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_ENCODING       => "gzip deflate",
+        CURLOPT_ENCODING       => "gzip, deflate",
         CURLOPT_SSL_VERIFYPEER => false,
         CURLOPT_TIMEOUT        => 5
     ];
