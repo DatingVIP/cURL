@@ -154,7 +154,7 @@ class Response
      */
     public function getError()
     {
-        return $this->error["errstr"];
+        return $this->error["error"];
     }
 
     /**
