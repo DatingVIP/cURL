@@ -4,7 +4,7 @@
     "description": "Curl based HTTP Client - Simple but effective OOP wrapper around Curl php lib",
     "keywords": ["curl"],
     "homepage": "https://github.com/DatingVIP/cURL",
-    "license": "LGPLv3",
+    "license": "LGPL-3.0-or-later",
     "authors": [
         {
             "name": "Joe Watkins",
