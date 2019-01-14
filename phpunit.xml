@@ -1,0 +1,17 @@
+<phpunit bootstrap="vendor/autoload.php">
+  <testsuites>
+    <testsuite name="Request">
+      <file>tests/Request.php</file>
+    </testsuite>
+    <testsuite name="Response">
+      <file>tests/Response.php</file>
+    </testsuite>
+  </testsuites>
+  <filter>
+  <whitelist processUncoveredFilesFromWhitelist="true">
+    <directory suffix=".php">src</directory>
+    <exclude>
+    </exclude>
+  </whitelist>
+  </filter>
+</phpunit>
