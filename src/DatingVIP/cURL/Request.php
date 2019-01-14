@@ -52,7 +52,7 @@ class Request
      */
     public function setCredentials($username, $password)
     {
-        return $this->setOption(
+	return $this->setOption(
             CURLOPT_USERPWD,
             "{$username}:{$password}"
         );
