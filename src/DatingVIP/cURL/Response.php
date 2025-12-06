@@ -63,7 +63,6 @@ class Response
         }
 
         $this->info = curl_getinfo($handle);
-        curl_close($handle);
     }
 
     /**
